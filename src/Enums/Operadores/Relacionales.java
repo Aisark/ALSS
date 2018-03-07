@@ -21,4 +21,11 @@ public enum Relacionales {
     private Relacionales(String operador){
         this.operador = operador;
     }
+    public String getChar(){
+        return operador;
+    }
+    @Override
+    public String toString(){
+        return operador;
+    }
 }

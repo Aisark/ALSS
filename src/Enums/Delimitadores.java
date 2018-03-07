@@ -3,26 +3,27 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Enums.Operadores;
+package Enums;
 
 /**
  *
  * @author dark_
  */
-public enum Logicos {
-    AND("&&"),
-    OR("||"),
-    NOT("!");
-    
-    private final String operador;
-    private Logicos(String operador){
-        this.operador = operador;
+public enum Delimitadores {
+    inicio("inicio#"),
+    fin("fin#"),
+    abrir("{"),
+    cerrar("}");
+    private final String delimitador;
+    private Delimitadores(String delimitador){
+        this.delimitador = delimitador;
     }
     public String getChar(){
-        return operador;
+        return delimitador;
     }
+    
     @Override
     public String toString(){
-        return operador;
+        return delimitador;
     }
 }

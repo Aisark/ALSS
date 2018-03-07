@@ -6,19 +6,24 @@
 package Sistema;
 
 import Enums.TipoDatos;
+import java.lang.reflect.Method;
 
 /**
  *
  * @author dark_
  */
-public class ClassTipoDatos implements InterfaceSentencias{
+public class ClassTipoDatos {
 
-    @Override
-    public boolean equals(String word) {
-        for(TipoDatos tipo: TipoDatos.values()){
-            if(tipo.toString().equals(word))return true;
-        }
-        return false;
-    }
     
+    public static <E extends Enum<E>> void enumValues(Class<E> enumData){
+        for(Enum<E> enumitem: enumData.getEnumConstants()){
+            try{
+                
+                Method item = enumitem.getDeclaringClass().getMethod("getChar");
+                System.out.println(enumitem.toString());
+            }catch(NoSuchMethodException e){
+                System.out.println(enumitem.name());
+            }
+        }
+    }
 }

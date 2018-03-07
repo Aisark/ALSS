@@ -10,10 +10,10 @@ package Enums.Estructuras;
  * @author dark_
  */
 public enum Condicion {
-    SI, //If
-    ENTONCES, //then
-    SINO, // else if
-    ELEGIR, // Switch
-    CASO, // Case
-    BREAK // Break
+    si, //If
+    entonces, //then
+    sino, // else if
+    elegir, // Switch
+    caso, // Case
+    finalizar // Break
 }

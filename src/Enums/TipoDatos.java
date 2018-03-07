@@ -20,7 +20,11 @@ public enum TipoDatos {
     private TipoDatos(String tipo){
         this.tipo = tipo;
     }
-    public String getTipoName(){
+    public String getChar(){
         return this.tipo;
+    }
+    @Override
+    public String toString(){
+        return tipo;
     }
 }

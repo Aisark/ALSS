@@ -17,8 +17,15 @@ public enum Asignacion {
     IGUALMAS("=+");
     
     private final String operador;
-    private final String tipo = "asignacion";
     private Asignacion(String operador){
         this.operador = operador;
+    }
+    public String getChar(){
+        return operador;
+    }
+    
+    @Override
+    public String toString(){
+        return operador;
     }
 }

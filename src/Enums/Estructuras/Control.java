@@ -10,6 +10,6 @@ package Enums.Estructuras;
  * @author dark_
  */
 public enum Control {
-    REPETIR,// While
-    PARA // For
+    Repetir,// While
+    Para // For
 }

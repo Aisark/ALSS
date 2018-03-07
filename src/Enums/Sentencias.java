@@ -10,6 +10,6 @@ package Enums;
  * @author dark_
  */
 public enum Sentencias {
-    LEER,
-    IMPRIMIR
+    leer,
+    imprimir
 }
