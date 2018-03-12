@@ -5,8 +5,6 @@
  */
 package Interfaz;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
@@ -139,18 +137,25 @@ public class main extends javax.swing.JFrame {
     private void txtEditorKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtEditorKeyReleased
         // TODO add your handling code here:
         lexico.splitLines(txtEditor);
+        if(jtTablaSimbolos.isVisible()){
+            setDataTableSimbolos();
+        }
     }//GEN-LAST:event_txtEditorKeyReleased
 
     private void jmitTablaSimbolosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmitTablaSimbolosActionPerformed
         // TODO add your handling code here:
+        setDataTableSimbolos();
+        jdTablaSimbolos.setVisible(true);
+    }//GEN-LAST:event_jmitTablaSimbolosActionPerformed
+    
+    
+    private void setDataTableSimbolos(){
         if(lexico.getListWords().size()>0){
             clearTable(jtTablaSimbolos);
             TablaSimbolos.setDataTableSimbolo(lexico.getListWords(),getModelTable(jtTablaSimbolos));            
             jtTablaSimbolos.setModel(TablaSimbolos.model());
         }
-        jdTablaSimbolos.setVisible(true);
-    }//GEN-LAST:event_jmitTablaSimbolosActionPerformed
-    
+    }
     private DefaultTableModel getModelTable(JTable model){
         return (DefaultTableModel)model.getModel();
     }
