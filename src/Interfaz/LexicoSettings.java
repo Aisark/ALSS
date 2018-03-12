@@ -14,34 +14,55 @@ import javax.swing.JTextArea;
  * @author dark_
  */
 public class LexicoSettings {
-    private ArrayList<String> words = new ArrayList<>();
+    private int line = 0;
+    private final ArrayList<String> words = new ArrayList<>();
+    private final ArrayList<Object[]> listwords = new ArrayList<>();
     private boolean reciveString  = false;
     private String stringword = "";
     //--------------------------------------------------------------------------
     //                   Publics Methods
     //--------------------------------------------------------------------------
-    public void setWords(JTextArea txtEditor){
+    
+    public void splitLines(JTextArea txtEditor){
+        line = 0;
         stringword="";
         reciveString=false;
-        words.clear();
+        listwords.clear();
         if (txtEditor.getText().length() > 0) {
             String wordeditor = txtEditor.getText();
-            String[] wordsarray = wordeditor.split("[\\n\\s\\t]");
+            String[] wordsarray = wordeditor.split("\n");
+            for(int i=0;i< wordsarray.length;i++ ){
+                if(!wordsarray[i].equals(""))setWords(wordsarray[i]);
+                line = i+1;
+            }
+        }
+    }
+    
+    private void setWords(String txtEditor){
+        if (txtEditor.length() > 0) {
+            String wordeditor = txtEditor;
+            String[] wordsarray = wordeditor.split("[\\s\\t]");
             for(String word: wordsarray){
                 if(!word.equals(""))setWord(word);
             }
         }
     }
-    public ArrayList<String> getListWords(){
-        return words;
+    public ArrayList<Object[]> getListWords(){
+        return listwords;
     }
-    
-    
-    
-    
+      
     //--------------------------------------------------------------------------
     //                   Privates Methods
     //--------------------------------------------------------------------------
+    private void addList(String word){
+        listwords.add(new Object[]{word,line});
+    }
+    /**
+     * Analiza una string y lo procesa para definir si es una sentencia
+     * o si es un string
+     * @param word 
+     * @return void
+     */
     private void setWord(String word){
         if(word.contains(";") && !reciveString && !word.startsWith("\"")){
             setDeclaritionWord(word);
@@ -49,23 +70,32 @@ public class LexicoSettings {
             setStringWord(word);
         }
         else if(!word.contains(";")){
-            words.add(word);
+            addList(word);
         }
     }
-    
+    /**
+     * Agrega una palabra en la lista words si considera que es una declaracion
+     * @param word 
+     * @return void
+     */
     private void setDeclaritionWord(String word){
         String newword = word.replaceAll(";","; ");
         String[] sentenArray = newword.split(" ");
         if(sentenArray.length>0){
             for(String sent: sentenArray){
-                if(!sent.equals(""))words.add(sent);
+                if(!sent.equals(""))addList(sent);
             }
         }else{
-            words.add(word);
+            addList(word);
         }
         
     }
-    
+    /**
+     * Organiza una literal de tipo String
+     * produce un error al ingresar esta secuencia  asd "asd "asd";AAS
+     * @param word tipo String reprenseta una palabra a analizar
+     * @return void 
+     */
     private void setStringWord(String word){
         if(word.contains("\"")){
             if(word.startsWith("\"")){
@@ -77,9 +107,7 @@ public class LexicoSettings {
                 }
 
             }else if(word.endsWith("\"")||word.endsWith("\";")){                
-                int occur = (word.endsWith("\";"))?
-                        (word.lastIndexOf("\";")-word.indexOf("\";")):
-                        (word.lastIndexOf("\"")-word.indexOf("\""));
+                int occur = (word.lastIndexOf("\"")-word.indexOf("\""));
                 if(occur==0){
                     stringword += word;
                     outSetStringWord(stringword);
@@ -94,13 +122,24 @@ public class LexicoSettings {
         }
         
     }    
+    /**
+     * Agrega una literal de tipo String en la lista word
+     * @return void
+     * @param word 
+     */
     private void outSetStringWord(String word){
-        words.add(word);
+        addList(word);
         stringword="";
         reciveString=false;
     }
+    /**
+     * Agrega una literal String organizada y se prepara para organizar otra
+     * @return void
+     * @param word 
+     */
     private void preOutSetStringWord(String word){
-        String newword = (word.contains("\";"))? word.replaceAll("\";","\"; "):word.replaceAll("\"","\" ");
+        String newword = word.replaceAll("\"","\" ").replaceAll(";", "; " );
+        newword = newword.replaceAll("\" ;", "\";" );
         String[] nwwords = newword.split(" ");
         for(String nww: nwwords){
             setWord(nww);

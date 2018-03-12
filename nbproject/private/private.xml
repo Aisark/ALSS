@@ -1,16 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
-    <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
+    <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="2">
+        <file>
+            <url>src/Interfaz/LexicoSettings.java</url>
+            <bookmark id="2">
+                <name/>
+                <line>108</line>
+                <key/>
+            </bookmark>
+        </file>
+    </editor-bookmarks>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/SC3%2004/Documents/ALSS/AnalizadorLSS/src/Enums/Operadores/Relacionales.java</file>
-            <file>file:/C:/Users/SC3%2004/Documents/ALSS/AnalizadorLSS/src/Enums/Operadores/Matematicos.java</file>
-            <file>file:/C:/Users/SC3%2004/Documents/ALSS/AnalizadorLSS/src/Enums/TipoDatos.java</file>
-            <file>file:/C:/Users/SC3%2004/Documents/ALSS/AnalizadorLSS/src/Enums/Sentencias.java</file>
-            <file>file:/C:/Users/SC3%2004/Documents/ALSS/AnalizadorLSS/src/Enums/Estructuras/Control.java</file>
-            <file>file:/C:/Users/SC3%2004/Documents/ALSS/AnalizadorLSS/src/Sistema/InterfaceOperadores.java</file>
-            <file>file:/C:/Users/SC3%2004/Documents/ALSS/AnalizadorLSS/src/Enums/Operadores/Asignacion.java</file>
-            <file>file:/C:/Users/SC3%2004/Documents/ALSS/AnalizadorLSS/src/Enums/Operadores/Logicos.java</file>
+            <file>file:/C:/Users/dark_/Documents/NetBeansProjects/ALSS/src/Interfaz/main.java</file>
+            <file>file:/C:/Users/dark_/Documents/NetBeansProjects/ALSS/src/Interfaz/LexicoSettings.java</file>
+            <file>file:/C:/Users/dark_/Documents/NetBeansProjects/ALSS/src/Interfaz/TablaSimbolos.java</file>
         </group>
     </open-files>
 </project-private>

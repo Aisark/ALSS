@@ -7,6 +7,8 @@ package Interfaz;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -22,6 +24,8 @@ public class main extends javax.swing.JFrame {
     public main() {
         initComponents();
         setLocationRelativeTo(null);
+        jdTablaSimbolos.setLocationRelativeTo(null);
+        lexico.splitLines(txtEditor);
     }
 
     /**
@@ -33,16 +37,61 @@ public class main extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
+        jdTablaSimbolos = new javax.swing.JDialog();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jtTablaSimbolos = new javax.swing.JTable();
         txtEditor = new javax.swing.JTextArea();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
-        jMenu2 = new javax.swing.JMenu();
+        jmVer = new javax.swing.JMenu();
+        jmitTablaSimbolos = new javax.swing.JMenuItem();
+
+        jdTablaSimbolos.setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        jdTablaSimbolos.setTitle("Tabla de simbolos");
+        jdTablaSimbolos.setIconImages(null);
+        jdTablaSimbolos.setMinimumSize(new java.awt.Dimension(700, 520));
+        jdTablaSimbolos.setPreferredSize(new java.awt.Dimension(700, 520));
+
+        jtTablaSimbolos.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Identificador", "Tipo", "Linea", "Numero de itendificador"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane1.setViewportView(jtTablaSimbolos);
+
+        javax.swing.GroupLayout jdTablaSimbolosLayout = new javax.swing.GroupLayout(jdTablaSimbolos.getContentPane());
+        jdTablaSimbolos.getContentPane().setLayout(jdTablaSimbolosLayout);
+        jdTablaSimbolosLayout.setHorizontalGroup(
+            jdTablaSimbolosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jdTablaSimbolosLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 672, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(18, Short.MAX_VALUE))
+        );
+        jdTablaSimbolosLayout.setVerticalGroup(
+            jdTablaSimbolosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jdTablaSimbolosLayout.createSequentialGroup()
+                .addGap(44, 44, 44)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 465, Short.MAX_VALUE)
+                .addContainerGap())
+        );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         txtEditor.setColumns(20);
         txtEditor.setRows(5);
+        txtEditor.setText("inicio#\n    dec cal1=0;\n    dec cal1=0;\n    dec cal1=0;\n    dec cal1=0;\n    dec cal1=0;\n    imprimir \"Hola mundo\";\n    leer(cal1);\nfin#");
         txtEditor.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 txtEditorKeyReleased(evt);
@@ -52,8 +101,18 @@ public class main extends javax.swing.JFrame {
         jMenu1.setText("File");
         jMenuBar1.add(jMenu1);
 
-        jMenu2.setText("Edit");
-        jMenuBar1.add(jMenu2);
+        jmVer.setText("Ver");
+
+        jmitTablaSimbolos.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_T, java.awt.event.InputEvent.CTRL_MASK));
+        jmitTablaSimbolos.setText("Tabla de simbolos");
+        jmitTablaSimbolos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmitTablaSimbolosActionPerformed(evt);
+            }
+        });
+        jmVer.add(jmitTablaSimbolos);
+
+        jMenuBar1.add(jmVer);
 
         setJMenuBar(jMenuBar1);
 
@@ -64,18 +123,14 @@ public class main extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(7, 7, 7)
                 .addComponent(txtEditor, javax.swing.GroupLayout.PREFERRED_SIZE, 605, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(88, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(15, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtEditor, javax.swing.GroupLayout.PREFERRED_SIZE, 468, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap())
+                .addContainerGap(20, Short.MAX_VALUE)
+                .addComponent(txtEditor, javax.swing.GroupLayout.PREFERRED_SIZE, 430, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(49, 49, 49))
         );
 
         pack();
@@ -83,9 +138,30 @@ public class main extends javax.swing.JFrame {
 
     private void txtEditorKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtEditorKeyReleased
         // TODO add your handling code here:
-        lexico.setWords(txtEditor);
-        System.out.println(lexico.getListWords().toString());
+        lexico.splitLines(txtEditor);
     }//GEN-LAST:event_txtEditorKeyReleased
+
+    private void jmitTablaSimbolosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmitTablaSimbolosActionPerformed
+        // TODO add your handling code here:
+        if(lexico.getListWords().size()>0){
+            clearTable(jtTablaSimbolos);
+            TablaSimbolos.setDataTableSimbolo(lexico.getListWords(),getModelTable(jtTablaSimbolos));            
+            jtTablaSimbolos.setModel(TablaSimbolos.model());
+        }
+        jdTablaSimbolos.setVisible(true);
+    }//GEN-LAST:event_jmitTablaSimbolosActionPerformed
+    
+    private DefaultTableModel getModelTable(JTable model){
+        return (DefaultTableModel)model.getModel();
+    }
+    private void clearTable(JTable table){
+        DefaultTableModel modelo = (DefaultTableModel)table.getModel();
+        if(modelo.getRowCount()>0){
+            do{
+                modelo.removeRow(modelo.getRowCount()-1);
+            }while(modelo.getRowCount()!=0);
+        }
+    }
     
     
     /**
@@ -122,10 +198,13 @@ public class main extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JMenu jMenu1;
-    private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JDialog jdTablaSimbolos;
+    private javax.swing.JMenu jmVer;
+    private javax.swing.JMenuItem jmitTablaSimbolos;
+    private javax.swing.JTable jtTablaSimbolos;
     private javax.swing.JTextArea txtEditor;
     // End of variables declaration//GEN-END:variables
 }
