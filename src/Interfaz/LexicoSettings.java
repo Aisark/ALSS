@@ -15,7 +15,6 @@ import javax.swing.JTextArea;
  */
 public class LexicoSettings {
     private int line = 0;
-    private final ArrayList<String> words = new ArrayList<>();
     private final ArrayList<Object[]> listwords = new ArrayList<>();
     private boolean reciveString  = false;
     private String stringword = "";
@@ -35,9 +34,10 @@ public class LexicoSettings {
                 if(!wordsarray[i].equals(""))setWords(wordsarray[i]);
                 line = i+1;
             }
+            if(!stringword.isEmpty())addList(stringword);
         }
     }
-    
+    //[<>=!] +=
     private void setWords(String txtEditor){
         if (txtEditor.length() > 0) {
             String wordeditor = txtEditor;
@@ -49,8 +49,7 @@ public class LexicoSettings {
     }
     public ArrayList<Object[]> getListWords(){
         return listwords;
-    }
-      
+    }      
     //--------------------------------------------------------------------------
     //                   Privates Methods
     //--------------------------------------------------------------------------
@@ -66,10 +65,12 @@ public class LexicoSettings {
     private void setWord(String word){
         if(word.contains(";") && !reciveString && !word.startsWith("\"")){
             setDeclaritionWord(word);
-        }if(word.startsWith("\"")||reciveString){
+        }else if(word.startsWith("\"")||reciveString){
             setStringWord(word);
+        }else if(word.contains("[<>=!]") && !reciveString && !word.startsWith("\"")){
+            separeAsginacion(word);
         }
-        else if(!word.contains(";")){
+        else /*if(!word.contains(";"))*/{
             addList(word);
         }
     }
@@ -79,7 +80,7 @@ public class LexicoSettings {
      * @return void
      */
     private void setDeclaritionWord(String word){
-        String newword = word.replaceAll(";","; ");
+        String newword = word.replaceAll(";"," ; ");
         String[] sentenArray = newword.split(" ");
         if(sentenArray.length>0){
             for(String sent: sentenArray){
@@ -97,15 +98,15 @@ public class LexicoSettings {
      * @return void 
      */
     private void setStringWord(String word){
+        // Si continene "
         if(word.contains("\"")){
-            if(word.startsWith("\"")){
+            if(word.startsWith("\"")){ //Si empeiza con "
                 if(word.endsWith("\"")||word.endsWith("\";")){
                     outSetStringWord(word);
                 }else{
                     stringword = word+" ";
                     reciveString=true;
                 }
-
             }else if(word.endsWith("\"")||word.endsWith("\";")){                
                 int occur = (word.lastIndexOf("\"")-word.indexOf("\""));
                 if(occur==0){
@@ -128,7 +129,8 @@ public class LexicoSettings {
      * @param word 
      */
     private void outSetStringWord(String word){
-        addList(word);
+        addList(word.replace("\";", "\""));
+        if(stringword.endsWith("\";"))addList(";");
         stringword="";
         reciveString=false;
     }
@@ -145,5 +147,12 @@ public class LexicoSettings {
             setWord(nww);
         }
     }
-    
+    private void separeAsginacion(String word){
+        String newword = word.replaceAll("[<>!]", " [<>!] ").
+                replaceAll("=", " = ").replaceAll("[<>=!] +=","[<>=!]=");
+        String[] newwords = newword.split(" ");
+        for(String w: newwords){
+            setWord(w);
+        }
+    }
 }
